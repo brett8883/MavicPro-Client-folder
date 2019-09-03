@@ -1,0 +1,14 @@
+@echo on
+adb shell mount -o remount,rw /vendor
+adb push dummy_verify.sh /vendor/bin/
+adb shell cd /vendor/bin/; chown root:root dummy_verify.sh; chmod 755 dummy_verify.sh; cp /sbin/dji_verify /vendor/bin/original_dji_verify_copy; sync; cd /
+adb shell mount -o remount,ro /vendor
+@echo off
+cd dumldore
+start dumldorevv3.exe
+echo.
+cd ..
+echo reboot drone
+pause
+
+adb shell mount -o bind /vendor/bin/dummy_verify.sh /sbin/dji_verify
